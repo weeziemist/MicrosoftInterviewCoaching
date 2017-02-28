@@ -26,7 +26,7 @@ def string_to_integer(str):
         return result
 
 def main():
-    expected = {'64': 64, '-64': -64, '': 0, '785fjhf': 0, '3000000000': 0, '8964': 8964, '-567': -567}
+    expected = {'64': 64, '-64': -64, '': 0, '785fjhf': 0, '3000000000': 0, '8964': 8964, '-567': -567, '0001': 1, '   10  ': 0}
     passed = 0
     failed = 0
     for key in expected:
