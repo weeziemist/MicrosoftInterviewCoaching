@@ -1,6 +1,7 @@
 def string_to_integer(str):
-        if len(str) == 0:
-            return 0
+    try:
+        assert(str != None)
+        assert(len(str) != 0)
             
         result = 0
         multiplier = 1
@@ -13,29 +14,25 @@ def string_to_integer(str):
             
         while index < len(str):
             c = str[index]
-            if ord(c) >= ord('0') and ord(c) <= ord('9'):
-                result *= 10
-                result += ord(c) - ord('0')
-            else:
-                return 0
+            assert(ord(c) >= ord('0') and ord(c) <= ord('9'))
+            result *= 10
+            result += ord(c) - ord('0')
             index += 1
         
         result *= multiplier
-        if result > 2147483647 or result < -2147483648:
-            return 0
+        assert(result <= 2147483647 and result >= -2147483648)
         return result
+    except AssertionError:
+        print('Invalid input.')
 
 def main():
-    expected = {'64': 64, '-64': -64, '': 0, '785fjhf': 0, '3000000000': 0, '8964': 8964, '-567': -567, '0001': 1, '   10  ': 0}
-    passed = 0
-    failed = 0
-    for key in expected:
-        if string_to_integer(key) == expected[key]:
-            print('passed')
-            passed += 1
-        else:
-            print('failed, case: %s, actual: %s, expected: %s' % (key, string_to_integer(key), expected[key]))
-            failed += 1
-    print('passed %s, failed %s.' % (passed, failed))
+    print('input: 64, expected: %s, actual: %s' % (64, string_to_integer('64')))
+    print('input: -64, expected: %s, actual: %s' % (-64, string_to_integer('-64')))
+    string_to_integer('')
+    print('input: 8964, expected: %s, actual: %s' % (8964, string_to_integer('8964')))
+    print('input: -567, expected: %s, actual: %s' % (-567, string_to_integer('-567')))
+    print('input: 0001, expected: %s, actual: %s' % (1, string_to_integer('0001')))
+    string_to_integer('   10  ')
+    string_to_integer(None)
 
 main()
